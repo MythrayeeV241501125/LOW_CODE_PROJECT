@@ -1,0 +1,1755 @@
+/*
+ * Author       : mythrayee.v.2024.aiml_raj
+ * Generated on : 21-Oct-2026 09:51:15
+ * Version      : 1.0
+ */
+ application "Library Management System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Book_Issues
+		{
+			displayname = "Book Issues"
+			success message = "Book issue recorded successfully!"
+			Section
+			(
+				type = section
+				displayname = "Issue Details"
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Issue_ID
+			(
+    			type = autonumber
+				displayname = "Issue ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Member
+			(
+				type = picklist	
+				values  = Members.ID
+    			displayformat = [Full_Name]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Book
+			(
+				type = picklist	
+				values  = Books.ID
+    			displayformat = [Book_Title]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Issue_Date
+			(
+    			type = date
+				displayname = "Issue Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Due_Date
+			(
+    			type = date
+				displayname = "Due Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Return_Details
+			(
+				type = section
+				displayname = "Return Details"
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			Return_Date
+			(
+    			type = date
+				displayname = "Return Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Issue_Status
+			(
+				type = picklist
+				displayname = "Issue Status"
+				values = {"Issued","Returned","Overdue"}
+				initial value = "Issued"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Single_Line
+			(
+    			type = text
+				displayname = "Remarks"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Books
+		{
+			success message = "Book saved successfully!"
+			Section
+			(
+				type = section
+				displayname = "Book Details"
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Book_ID
+			(
+    			type = autonumber
+				displayname = "Book ID"
+				start index = 101
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			unique ISBN
+			(
+    			type = text
+				maxchar = 20
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Book_Title
+			(
+    			type = text
+				displayname = "Book Title"
+				maxchar = 150
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Author
+			(
+    			type = text
+				maxchar = 100
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Category
+			(
+				type = picklist
+				values = {"Fiction","Science","Technology","History","General"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Publisher
+			(
+    			type = text
+				maxchar = 100
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Stock_Details
+			(
+				type = section
+				displayname = "Stock Details"
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			must have Total_Copies
+			(
+				type = number
+				displayname = "Total Copies"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Available_Copies
+			(
+				type = number
+				displayname = "Available Copies"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Single_Line
+			(
+    			type = text
+				displayname = "Shelf Location"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Members
+		{
+			success message = "Member registered successfully!"
+			Section
+			(
+				type = section
+				displayname = "Member Details"
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Member_ID
+			(
+    			type = autonumber
+				displayname = "Member ID"
+				start index = 1001
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Full_Name
+			(
+    			type = text
+				displayname = "Full Name"
+				maxchar = 100
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			unique Roll_Number
+			(
+    			type = text
+				displayname = "Roll Number"
+				maxchar = 20
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Email
+			(
+    			type = email
+				maxchar = 100
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Phone
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Department
+			(
+				type = picklist
+				values = {"CSE","AIML","ECE","IT","MECH","EEE"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Single_Line
+			(
+    			type = text
+				displayname = "Address"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Membership
+			(
+				type = section
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			must have Registration_Date
+			(
+    			type = date
+				displayname = "Registration Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			must have Member_Status
+			(
+				type = picklist
+				displayname = "Member Status"
+				values = {"Active","Inactive"}
+				initial value = "Active"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Books
+		{
+			displayName = "Book Catalogue"
+			show all rows from Books    
+			(
+				Book_ID as "Book ID"
+				ISBN
+				Book_Title as "Book Title"
+				Author
+				Category
+				Publisher
+				Total_Copies as "Total Copies"
+				Available_Copies as "Available Copies"
+				Single_Line as "Shelf Location"
+			)
+		}
+		default list All_Members
+		{
+			displayName = "Member List"
+			show all rows from Members    
+			(
+				Member_ID as "Member ID"
+				Full_Name as "Full Name"
+				Roll_Number as "Roll Number"
+				Department
+				Email
+				Phone as "Phone Number"
+				Registration_Date as "Registration Date"
+				Member_Status as "Member Status"
+			)
+		}
+		default list All_Book_Issues
+		{
+			displayName = "Issue Register"
+			show all rows from Book_Issues    
+			(
+				Issue_ID as "Issue ID"
+				Member
+				Book
+				Issue_Date as "Issue Date"
+				Due_Date as "Due Date"
+				Return_Date as "Return Date"
+				Issue_Status as "Issue Status"
+				Single_Line as "Remarks"
+			)
+		}
+		list Currently_Issued
+		{
+			displayName = "Currently Issued"
+			show all rows from Book_Issues  [Issue_Status != "Returned"]  
+			(
+				Issue_ID as "Issue ID"
+				Member
+				Book
+				Issue_Date as "Issue Date"
+				Due_Date as "Due Date"
+				Return_Date as "Return Date"
+				Issue_Status as "Issue Status"
+				Single_Line as "Remarks"
+			)
+		}
+		list Returned_Books
+		{
+			displayName = "Returned Books"
+			show all rows from Book_Issues  [Issue_Status == "Returned"]  
+			(
+				Issue_ID as "Issue ID"
+				Member
+				Book
+				Issue_Date as "Issue Date"
+				Due_Date as "Due Date"
+				Return_Date as "Return Date"
+				Issue_Status as "Issue Status"
+				Single_Line as "Remarks"
+			)
+		}
+		list Overdue_Books
+		{
+			displayName = "Overdue Books"
+			show all rows from Book_Issues  [Issue_Status == "Overdue" || (Issue_Status == "Issued" && Due_Date < zoho.currentdate)]  
+			(
+				Issue_ID as "Issue ID"
+				Member
+				Book
+				Issue_Date as "Issue Date"
+				Due_Date as "Due Date"
+				Return_Date as "Return Date"
+				Issue_Status as "Issue Status"
+				Single_Line as "Remarks"
+			)
+		}
+	}
+	pages
+	{
+		page Library_Dashboard
+		{
+			displayname = "Library Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='Total_Titles_KPI'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#1E88E5'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n    borderColor = '#1E88E5'\n    borderWidth = '0px'\n\n\t  value = 'thisapp.Books.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#333333'\n    borderWidth = '0px'\n\n\t  value = 'Total Book Titles'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='Total_Members_KPI'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#6A1B9A'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n    borderColor = '#6A1B9A'\n    borderWidth = '0px'\n\n\t  value = 'thisapp.Members.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#333333'\n    borderWidth = '0px'\n\n\t  value = 'Total Members'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='Available_Copies_KPI'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#2E7D32'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n    borderColor = '#2E7D32'\n    borderWidth = '0px'\n\n\t  value = 'thisapp.Books.Available_Copies.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#333333'\n    borderWidth = '0px'\n\n\t  value = 'Total Available Copies'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<panel elementName='Currently_Issued_KPI'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#EF6C00'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n    borderColor = '#EF6C00'\n    borderWidth = '0px'\n\n\t\tcriteria = 'Issue_Status != &quot;Returned&quot;'\n\t  value = 'thisapp.Book_Issues.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#333333'\n    borderWidth = '0px'\n\n\t  value = 'Books Currently Issued'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='50%'\n   \t>\n\t<panel elementName='Overdue_KPI'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#C62828'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n    borderColor = '#C62828'\n    borderWidth = '0px'\n\n\t\tcriteria = 'Issue_Status == &quot;Overdue&quot;'\n\t  value = 'thisapp.Book_Issues.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#333333'\n    borderWidth = '0px'\n\n\t  value = 'Overdue Books'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Issues_by_Status'\n\n\ttype = 'Pie'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Book_Issues'\n\txfield = 'Issue_Status'\n\tyfields = 'count:Issue_ID'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Available_Copies_by_Category'\n\n\ttype = 'Column'\n\txtitle = 'Category'\n\tytitle = 'Available Copies'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Books'\n\txfield = 'Category'\n\tyfields = 'sum:Available_Copies'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Currently_Issued_Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'Currently_Issued'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '500'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+		 functions
+		 {
+			 Deluge
+			 {
+				 void loadSampleData()
+                 {
+                 	// one-time load of the sample library catalogue and members
+                 	insert into Books
+                 	[
+                 		Added_User=zoho.loginuser
+                 		ISBN="9780132350884"
+                 		Book_Title="Clean Code"
+                 		Author="Robert C. Martin"
+                 		Category="Technology"
+                 		Publisher="Prentice Hall"
+                 		Total_Copies=3
+                 		Available_Copies=3
+                 		Single_Line="T-01"
+                 	]
+                 	insert into Books
+                 	[
+                 		Added_User=zoho.loginuser
+                 		ISBN="9780262033848"
+                 		Book_Title="Introduction to Algorithms"
+                 		Author="Thomas H. Cormen"
+                 		Category="Technology"
+                 		Publisher="MIT Press"
+                 		Total_Copies=2
+                 		Available_Copies=2
+                 		Single_Line="T-02"
+                 	]
+                 	insert into Books
+                 	[
+                 		Added_User=zoho.loginuser
+                 		ISBN="9780131103627"
+                 		Book_Title="The C Programming Language"
+                 		Author="Brian W. Kernighan"
+                 		Category="Technology"
+                 		Publisher="Prentice Hall"
+                 		Total_Copies=2
+                 		Available_Copies=2
+                 		Single_Line="T-03"
+                 	]
+                 	insert into Books
+                 	[
+                 		Added_User=zoho.loginuser
+                 		ISBN="9780553380163"
+                 		Book_Title="A Brief History of Time"
+                 		Author="Stephen Hawking"
+                 		Category="Science"
+                 		Publisher="Bantam"
+                 		Total_Copies=2
+                 		Available_Copies=2
+                 		Single_Line="S-01"
+                 	]
+                 	insert into Books
+                 	[
+                 		Added_User=zoho.loginuser
+                 		ISBN="9780393609394"
+                 		Book_Title="Astrophysics for People in a Hurry"
+                 		Author="Neil deGrasse Tyson"
+                 		Category="Science"
+                 		Publisher="W. W. Norton"
+                 		Total_Copies=1
+                 		Available_Copies=1
+                 		Single_Line="S-02"
+                 	]
+                 	insert into Books
+                 	[
+                 		Added_User=zoho.loginuser
+                 		ISBN="9780062316097"
+                 		Book_Title="Sapiens"
+                 		Author="Yuval Noah Harari"
+                 		Category="History"
+                 		Publisher="Harper"
+                 		Total_Copies=2
+                 		Available_Copies=2
+                 		Single_Line="H-01"
+                 	]
+                 	insert into Books
+                 	[
+                 		Added_User=zoho.loginuser
+                 		ISBN="9780061120084"
+                 		Book_Title="To Kill a Mockingbird"
+                 		Author="Harper Lee"
+                 		Category="Fiction"
+                 		Publisher="Harper Perennial"
+                 		Total_Copies=2
+                 		Available_Copies=2
+                 		Single_Line="F-01"
+                 	]
+                 	insert into Books
+                 	[
+                 		Added_User=zoho.loginuser
+                 		ISBN="9780451524935"
+                 		Book_Title="1984"
+                 		Author="George Orwell"
+                 		Category="Fiction"
+                 		Publisher="Signet Classics"
+                 		Total_Copies=1
+                 		Available_Copies=1
+                 		Single_Line="F-02"
+                 	]
+                 	insert into Members
+                 	[
+                 		Added_User=zoho.loginuser
+                 		Full_Name="Arun Kumar"
+                 		Roll_Number="241501001"
+                 		Email="arun.k@example.com"
+                 		Phone="9876543201"
+                 		Department="CSE"
+                 		Registration_Date="01-Jul-2026".toDate()
+                 		Member_Status="Active"
+                 	]
+                 	insert into Members
+                 	[
+                 		Added_User=zoho.loginuser
+                 		Full_Name="Priya S"
+                 		Roll_Number="241501002"
+                 		Email="priya.s@example.com"
+                 		Phone="9876543202"
+                 		Department="AIML"
+                 		Registration_Date="01-Jul-2026".toDate()
+                 		Member_Status="Active"
+                 	]
+                 	insert into Members
+                 	[
+                 		Added_User=zoho.loginuser
+                 		Full_Name="Karthik R"
+                 		Roll_Number="241501003"
+                 		Email="karthik.r@example.com"
+                 		Phone="9876543203"
+                 		Department="ECE"
+                 		Registration_Date="05-Jul-2026".toDate()
+                 		Member_Status="Active"
+                 	]
+                 	insert into Members
+                 	[
+                 		Added_User=zoho.loginuser
+                 		Full_Name="Divya M"
+                 		Roll_Number="241501004"
+                 		Email="divya.m@example.com"
+                 		Phone="9876543204"
+                 		Department="IT"
+                 		Registration_Date="05-Jul-2026".toDate()
+                 		Member_Status="Active"
+                 	]
+                 	insert into Members
+                 	[
+                 		Added_User=zoho.loginuser
+                 		Full_Name="Rahul V"
+                 		Roll_Number="241501005"
+                 		Email="rahul.v@example.com"
+                 		Phone="9876543205"
+                 		Department="MECH"
+                 		Registration_Date="10-Jul-2026".toDate()
+                 		Member_Status="Inactive"
+                 	]
+                 	info "Books: " + Books[ID != 0].count() + " | Members: " + Members[ID != 0].count();
+                 }
+				 void markOverdueIssues()
+                 {
+                 	// mark every unreturned issue whose due date has passed as Overdue
+                 	count = 0;
+                 	for each  rec in Book_Issues[Issue_Status == "Issued" && Due_Date < zoho.currentdate]
+                 	{
+                 		rec.Issue_Status="Overdue";
+                 		count = count + 1;
+                 	}
+                 	info "Issues marked Overdue: " + count;
+                 }
+				 void stockCheck()
+                 {
+                 	// verify: Available Copies = Total Copies - copies not yet returned
+                 	for each  bk in Books[ID != 0] sort by Book_ID
+                 	{
+                 		out = Book_Issues[Book == bk.ID && Issue_Status != "Returned"].count();
+                 		if(bk.Total_Copies - out == bk.Available_Copies)
+                 		{
+                 			chk = "OK";
+                 		}
+                 		else
+                 		{
+                 			chk = "MISMATCH";
+                 		}
+                 		info bk.Book_Title + " | Total: " + bk.Total_Copies + " | Issued: " + out + " | Available: " + bk.Available_Copies + " | " + chk;
+                 	}
+                 }
+			 }
+		 }
+
+
+		workflow
+		{
+		form
+		{
+			Validate_Book_Copies as "Validate Book Copies"
+			{
+				type =  form
+				form = Books
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Books - validation on form submission (Created or Edited)
+										if(input.Total_Copies == null || input.Total_Copies <= 0)
+										{
+											alert "Total Copies must be greater than zero.";
+											cancel submit;
+										}
+										if(input.Available_Copies != null && input.Available_Copies < 0 || input.Available_Copies > input.Total_Copies)
+										{
+											alert "Available Copies must be between 0 and Total Copies (" + input.Total_Copies + ").";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Set_Available_Copies as "Set Available Copies"
+			{
+				type =  form
+				form = Books
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Books - on successful submission (Created): new book starts with all copies available
+										if(input.Available_Copies == null)
+										{
+											input.Available_Copies = input.Total_Copies;
+										}
+						)
+					}
+				}
+
+			}
+			Default_Registration_Date as "Default Registration Date"
+			{
+				type =  form
+				form = Members
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Members - on load (Created): registration date defaults to today
+										input.Registration_Date = zoho.currentdate;
+						)
+					}
+				}
+
+			}
+			Default_Issue_and_Due_Dat as "Default Issue and Due Date"
+			{
+				type =  form
+				form = Book_Issues
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Book Issues - on load (Created): default issue date and 14-day due date
+										input.Issue_Date = zoho.currentdate;
+										input.Due_Date = zoho.currentdate.addDay(14);
+										input.Issue_Status = "Issued";
+						)
+					}
+				}
+
+			}
+			Calculate_Due_Date as "Calculate Due Date"
+			{
+				type =  form
+				form = Book_Issues
+
+				record event = on add or edit
+
+				on user input of Issue_Date
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Book Issues - on user input of Issue Date: due date = issue date + 14 days
+										if(input.Issue_Date != null)
+										{
+											input.Due_Date = input.Issue_Date.addDay(14);
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Book_Issue as "Validate Book Issue"
+			{
+				type =  form
+				form = Book_Issues
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Book Issues - validation when a book is issued (Created)
+										mem = Members[ID == input.Member];
+										if(mem.Member_Status != "Active")
+										{
+											alert "Member " + mem.Full_Name + " is Inactive. Books can be issued only to active members.";
+											cancel submit;
+										}
+										bk = Books[ID == input.Book];
+										if(bk.Available_Copies == null || bk.Available_Copies <= 0)
+										{
+											alert "No copies of '" + bk.Book_Title + "' are available. The book cannot be issued.";
+											cancel submit;
+										}
+										if(input.Return_Date != null)
+										{
+											alert "Return Date cannot be entered while issuing a book.";
+											cancel submit;
+										}
+										if(input.Due_Date != null && input.Due_Date < input.Issue_Date)
+										{
+											alert "Due Date cannot be before the Issue Date.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Reduce_Stock_on_Issue as "Reduce Stock on Issue"
+			{
+				type =  form
+				form = Book_Issues
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Book Issues - after a successful issue (Created): reduce stock by exactly one
+										bk = Books[ID == input.Book];
+										bk.Available_Copies=bk.Available_Copies - 1;
+										if(input.Due_Date == null)
+										{
+											input.Due_Date = input.Issue_Date.addDay(14);
+										}
+										if(input.Due_Date < zoho.currentdate)
+										{
+											input.Issue_Status = "Overdue";
+										}
+										else
+										{
+											input.Issue_Status = "Issued";
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Book_Return as "Validate Book Return"
+			{
+				type =  form
+				form = Book_Issues
+
+				record event = on edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Book Issues - validation when an issue record is edited (return of a book)
+										prev = Book_Issues[ID == input.ID];
+										if(prev.Book != input.Book || prev.Member != input.Member)
+										{
+											alert "Member and Book cannot be changed after the book is issued.";
+											cancel submit;
+										}
+										if(prev.Issue_Status == "Returned")
+										{
+											alert "This book was already returned on " + prev.Return_Date + ". The return cannot be recorded again.";
+											cancel submit;
+										}
+										if(input.Issue_Status == "Returned" && input.Return_Date == null)
+										{
+											alert "Enter the Return Date to mark the book as Returned.";
+											cancel submit;
+										}
+										if(input.Return_Date != null && input.Return_Date < input.Issue_Date)
+										{
+											alert "Return Date cannot be before the Issue Date.";
+											cancel submit;
+										}
+										// valid return: increase stock by exactly one (once only - a returned record is locked above)
+										if(input.Return_Date != null)
+										{
+											bk = Books[ID == input.Book];
+											if(bk.Available_Copies < bk.Total_Copies)
+											{
+												bk.Available_Copies=bk.Available_Copies + 1;
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Update_Status_on_Return as "Update Status on Return"
+			{
+				type =  form
+				form = Book_Issues
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Book Issues - after a successful edit: set the correct status
+										if(input.Return_Date != null)
+										{
+											input.Issue_Status = "Returned";
+											if(input.Return_Date > input.Due_Date)
+											{
+												input.Single_Line = "Returned late (" + input.Due_Date.daysBetween(input.Return_Date) + " days after due date)";
+											}
+											else
+											{
+												input.Single_Line = "Returned on time";
+											}
+										}
+										else if(input.Due_Date < zoho.currentdate)
+										{
+											input.Issue_Status = "Overdue";
+										}
+										else
+										{
+											input.Issue_Status = "Issued";
+										}
+						)
+					}
+				}
+
+			}
+			Restore_Stock_on_Delete as "Restore Stock on Delete"
+			{
+				type =  form
+				form = Book_Issues
+
+				record event = on delete
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Book Issues - before deletion: give the copy back if the book was never returned
+										if(input.Issue_Status != "Returned")
+										{
+											bk = Books[ID == input.Book];
+											if(bk.Available_Copies < bk.Total_Copies)
+											{
+												bk.Available_Copies=bk.Available_Copies + 1;
+											}
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "LMS"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Book_Issues
+			{
+				label placement = left
+			}
+			form Books
+			{
+				label placement = left
+			}
+			form Members
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Books
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Book_ID as "Book ID"
+								ISBN
+								Book_Title as "Book Title"
+								Author
+								Category
+								Publisher
+								Total_Copies as "Total Copies"
+								Available_Copies as "Available Copies"
+								Single_Line as "Shelf Location"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Book_ID as "Book ID"
+								ISBN
+								Book_Title as "Book Title"
+								Author
+								Category
+								Publisher
+								Total_Copies as "Total Copies"
+								Available_Copies as "Available Copies"
+								Single_Line as "Shelf Location"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Members
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Member_ID as "Member ID"
+								Full_Name as "Full Name"
+								Roll_Number as "Roll Number"
+								Department
+								Email
+								Phone as "Phone Number"
+								Registration_Date as "Registration Date"
+								Member_Status as "Member Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Member_ID as "Member ID"
+								Full_Name as "Full Name"
+								Roll_Number as "Roll Number"
+								Department
+								Email
+								Phone as "Phone Number"
+								Registration_Date as "Registration Date"
+								Member_Status as "Member Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Book_Issues
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Issue_ID as "Issue ID"
+								Member
+								Book
+								Issue_Date as "Issue Date"
+								Due_Date as "Due Date"
+								Return_Date as "Return Date"
+								Issue_Status as "Issue Status"
+								Single_Line as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Issue_ID as "Issue ID"
+								Member
+								Book
+								Issue_Date as "Issue Date"
+								Due_Date as "Due Date"
+								Return_Date as "Return Date"
+								Issue_Status as "Issue Status"
+								Single_Line as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Currently_Issued
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Issue_ID as "Issue ID"
+								Member
+								Book
+								Issue_Date as "Issue Date"
+								Due_Date as "Due Date"
+								Return_Date as "Return Date"
+								Issue_Status as "Issue Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Issue_ID as "Issue ID"
+								Member
+								Book
+								Issue_Date as "Issue Date"
+								Due_Date as "Due Date"
+								Return_Date as "Return Date"
+								Issue_Status as "Issue Status"
+								Single_Line as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Returned_Books
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Issue_ID as "Issue ID"
+								Member
+								Book
+								Issue_Date as "Issue Date"
+								Due_Date as "Due Date"
+								Return_Date as "Return Date"
+								Issue_Status as "Issue Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Issue_ID as "Issue ID"
+								Member
+								Book
+								Issue_Date as "Issue Date"
+								Due_Date as "Due Date"
+								Return_Date as "Return Date"
+								Issue_Status as "Issue Status"
+								Single_Line as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Overdue_Books
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Issue_ID as "Issue ID"
+								Member
+								Book
+								Issue_Date as "Issue Date"
+								Due_Date as "Due Date"
+								Return_Date as "Return Date"
+								Issue_Status as "Issue Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Issue_ID as "Issue ID"
+								Member
+								Book
+								Issue_Date as "Issue Date"
+								Due_Date as "Due Date"
+								Return_Date as "Return Date"
+								Issue_Status as "Issue Status"
+								Single_Line as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Books
+				{
+					displayname = "Books"
+					icon = "education-books-46"
+					form  Books
+					{
+						icon = "education-books-46"
+					}
+					report All_Books
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Members
+				{
+					displayname = "Members"
+					icon = "users-multiple-11"
+					form  Members
+					{
+						icon = "users-multiple-11"
+					}
+					report All_Members
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Book_Issues
+				{
+					displayname = "Book Issues"
+					icon = "education-book-open"
+					form  Book_Issues
+					{
+						icon = "education-book-open"
+					}
+					report All_Book_Issues
+					{
+						icon = "tech-desktop"
+					}
+					report Currently_Issued
+					{
+						icon = "education-book-open"
+					}
+					report Returned_Books
+					{
+						icon = "education-book-open"
+					}
+					report Overdue_Books
+					{
+						icon = "education-book-open"
+					}
+				}
+				section Library_Dashboard
+				{
+					displayname = "Library Dashboard"
+					icon = "business-books"
+					page Library_Dashboard
+					{
+						icon = "business-books"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Book_Issues
+			{
+				label placement = auto
+			}
+			form Books
+			{
+				label placement = auto
+			}
+			form Members
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Book_Issues
+			{
+				label placement = auto
+			}
+			form Books
+			{
+				label placement = auto
+			}
+			form Members
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = red
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
